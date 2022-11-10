@@ -12,7 +12,7 @@ contract Bank{
     //specifies bank transaction information. 
     struct BankTransaction
     {
-            //fields of the structure.
+            
 
         string payment_id;   
         address client_id; 
@@ -23,7 +23,7 @@ contract Bank{
         bytes20 tx_hash;
     }
 
-    //mapping ties the sender of ETH to their address so our contract knows who sent the ETH and stores it.
+   
      
         mapping(string => BankTransaction) public bank_tx;
         mapping(address => string[]) public tx_list;
@@ -32,7 +32,7 @@ contract Bank{
         function AddNewPayment(address payable _receiver, uint _amount, string memory _note)public payable
         
         {
-            //creates a new payment
+            //create a new payment
             string memory _payment_id = string(abi.encodePacked("payment_id " , " + ", Strings.toString(pay_id))); // String concantenation
             uint256 _timestamp = block.timestamp; // time of payment
             bytes20 _tx_hash = ripemd160(abi.encodePacked(_payment_id, msg.sender, _receiver, _amount, _timestamp)); //transaction hash.
@@ -57,7 +57,7 @@ contract Bank{
             (string memory, address, address, uint, uint256, string memory, bytes20)
 
         {
-            /* gets information about the payment by its identifier */
+            /* get the payment by its identifier */
             return (
              bank_tx[_payment_id].payment_id,
              bank_tx[_payment_id].client_id,
@@ -73,7 +73,7 @@ contract Bank{
             
         function getAllPayments(address payable _client) public view returns (string [] memory)
             {
-                /* gets client transactions to a particular customer */ 
+                /* get client transactions to a particular customer */ 
                    return tx_list[_client];
         }
     
